@@ -1,5 +1,3 @@
-.PHONY: fmt lint test 
-
 .DEFAULT_GOAL := help
 
 help:
@@ -15,3 +13,5 @@ lint: FORCE ## Lint Code
 
 test: FORCE ## Run Test
 	go test -v -cover ./...
+
+FORCE:
