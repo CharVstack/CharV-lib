@@ -3,17 +3,9 @@ package storage
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/joho/godotenv"
 	"os"
 	"path/filepath"
 )
-
-var storageDir string
-
-func init() {
-	godotenv.Load("./.env")
-	storageDir = os.Getenv("STORAGE_DIR")
-}
 
 func IsPoolExists(path string) (bool, error) {
 	f, err := os.Stat(path)
@@ -21,6 +13,7 @@ func IsPoolExists(path string) (bool, error) {
 }
 
 func GetPoolFiles() []string {
+	storageDir := os.Getenv("STORAGE_DIR")
 	entries, err := os.ReadDir(storageDir)
 	if err != nil {
 		fmt.Println(err)
@@ -34,6 +27,7 @@ func GetPoolFiles() []string {
 }
 
 func GetPoolInfo(file string) *PoolInfo {
+	storageDir := os.Getenv("STORAGE_DIR")
 	path, _ := filepath.Abs(filepath.Join(storageDir, file))
 	bytes, err := os.ReadFile(path)
 	if err != nil {

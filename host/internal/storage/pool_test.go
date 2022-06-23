@@ -5,21 +5,22 @@ import (
 	"testing"
 )
 
-func TestGetStoragePoolFiles(t *testing.T) {
+func TestGetPoolFiles(t *testing.T) {
+	t.Setenv("STORAGE_DIR", "../../../storage")
 	files := []string{"default.json"}
 	if !reflect.DeepEqual(GetPoolFiles(), files) {
 		t.Error(`miss`)
 	}
 }
 
-func TestGetStoragePoolInfo(t *testing.T) {
+func TestGetPoolInfo(t *testing.T) {
+	t.Setenv("STORAGE_DIR", "../../../storage")
 	storagePool := PoolInfo{
-		Name:      "default",
-		TotalSize: 20000,
-		Path:      "/var/cpu/libvirt/default",
+		Name: "default",
+		Path: "/var/lib/libvirt/default",
 	}
 	storagePoolInfo := GetPoolInfo("default.json")
-	if !reflect.DeepEqual(storagePoolInfo, storagePool) {
+	if !reflect.DeepEqual(*storagePoolInfo, storagePool) {
 		t.Error(`miss`)
 	}
 }
