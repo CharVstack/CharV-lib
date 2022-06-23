@@ -14,4 +14,7 @@ lint: FORCE ## Lint Code
 test: FORCE ## Run Test
 	go test -v -cover ./...
 
+.env:
+	echo STORAGE_DIR=$(CURDIR)/storage > .env
+
 FORCE:
