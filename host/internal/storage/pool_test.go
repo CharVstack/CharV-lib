@@ -6,7 +6,7 @@ import (
 )
 
 func TestGetPoolFiles(t *testing.T) {
-	t.Setenv("STORAGE_DIR", "../../../storage")
+	t.Setenv("STORAGE_DIR", "../../../test/resources/storage")
 	files := []string{"default.json"}
 	if !reflect.DeepEqual(GetPoolFiles(), files) {
 		t.Error(`miss`)
@@ -14,7 +14,7 @@ func TestGetPoolFiles(t *testing.T) {
 }
 
 func TestGetPoolInfo(t *testing.T) {
-	t.Setenv("STORAGE_DIR", "../../../storage")
+	t.Setenv("STORAGE_DIR", "../../../test/resources/storage")
 	storagePool := PoolInfo{
 		Name: "default",
 		Path: "/var/lib/libvirt/default",
