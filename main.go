@@ -5,7 +5,7 @@ import (
 
 	"github.com/joho/godotenv"
 
-	"github.com/CharVstack/ChaV-lib/host"
+	"github.com/CharVstack/CharV-lib/host"
 )
 
 func init() {
