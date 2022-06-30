@@ -1,6 +1,6 @@
 package host
 
-import "github.com/CharVstack/ChaV-lib/host/internal/storage"
+import "github.com/CharVstack/CharV-lib/host/internal/storage"
 
 type Host struct {
 	Cpu          int
