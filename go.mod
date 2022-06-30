@@ -1,4 +1,4 @@
-module github.com/CharVstack/ChaV-lib
+module github.com/CharVstack/CharV-lib
 
 go 1.18
 
