@@ -14,6 +14,10 @@ lint: FORCE ## Lint Code
 test: FORCE ## Run Test
 	go test -v -cover ./...
 
+get: FORCE ## Get and Update Modules
+	go get -u ./...
+	go mod tidy
+
 .env:
 	echo STORAGE_DIR=$(CURDIR)/storage > .env
 
