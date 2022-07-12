@@ -14,7 +14,7 @@ lint: FORCE ## Lint Code
 test: FORCE ## Run Test
 	go test -v -cover ./...
 
-get: FORCE ## Get and Update Modules
+update: FORCE ## Update and Clean Modules
 	go get -u ./...
 	go mod tidy
 
