@@ -26,5 +26,9 @@ func GetInfo() Host {
 		storagePools = append(storagePools, storagePoolInfo)
 	}
 
-	return Host{Cpu: cpuInfo, Memory: memoryInfo, StoragePools: storagePools}
+	return Host{
+		Cpu:          cpuInfo,
+		Memory:       memoryInfo,
+		StoragePools: storagePools,
+	}
 }
