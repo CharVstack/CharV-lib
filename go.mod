@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	github.com/joho/godotenv v1.4.0
+	github.com/mattn/go-shellwords v1.0.12
 	github.com/shirou/gopsutil/v3 v3.22.6
 )
 

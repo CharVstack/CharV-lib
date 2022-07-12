@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/joho/godotenv"
 
-	"github.com/CharVstack/CharV-lib/host"
+	_ "github.com/CharVstack/CharV-lib/host"
+	_ "github.com/CharVstack/CharV-lib/qemu"
 )
 
 func init() {
@@ -13,6 +12,4 @@ func init() {
 }
 
 func main() {
-	hoge := host.GetInfo()
-	fmt.Printf("%+v", hoge)
 }
