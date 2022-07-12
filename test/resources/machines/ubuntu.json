@@ -1,0 +1,14 @@
+{
+    "name": "ubuntu",
+    "memory": 1024,
+    "vcpu": 1,
+    "devices": {
+      "disk": [
+        {
+          "type": "file",
+          "device": "disk",
+          "path": "/path/to/ubuntu.qcow2"
+        }
+      ]
+    }
+}
