@@ -6,9 +6,15 @@ import (
 	"github.com/CharVstack/CharV-lib/host/internal/storage"
 )
 
-func GetInfo() Host {
-	cpuInfo := cpu.GetInfo()
-	memoryInfo := memory.GetInfo()
+func GetInfo() (Host, error) {
+	cpuInfo, err := cpu.GetInfo()
+	if err != nil {
+		return Host{}, err
+	}
+	memoryInfo, err := memory.GetInfo()
+	if err != nil {
+		return Host{}, err
+	}
 
 	poolConfigPaths := storage.GetPoolFiles()
 
@@ -30,5 +36,5 @@ func GetInfo() Host {
 		Cpu:          cpuInfo,
 		Memory:       memoryInfo,
 		StoragePools: storagePools,
-	}
+	}, nil
 }

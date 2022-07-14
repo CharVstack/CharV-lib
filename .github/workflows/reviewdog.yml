@@ -30,6 +30,19 @@ jobs:
           level: warning
           reporter: github-pr-review
 
+  errcheck:
+    name: runner / errcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: run errcheck
+        uses: reviewdog/action-golangci-lint@v2
+        with:
+          golangci_lint_flags: "--disable-all -E errcheck"
+          tool_name: errcheck
+          level: warning
+          reporter: github-pr-review
+
   misspell:
     name: runner / misspell
     runs-on: ubuntu-latest

@@ -8,6 +8,12 @@
 go install golang.org/x/tools/cmd/goimports@latest
 ```
 
+### errcheckのインストール
+
+```bash
+go install github.com/kisielk/errcheck@latest
+```
+
 ### テストやフォーマットなど
 
 `make help` を参照。
