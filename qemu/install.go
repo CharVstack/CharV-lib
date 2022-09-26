@@ -6,7 +6,7 @@ import (
 )
 
 func CreateDisk(opts string) error {
-	tmpl, err := template.New("create").Parse(`qemu-img create -f qcow2 /var/lib/charVstack/images/{{.}}.qcow2 8G`)
+	tmpl, err := template.New("create").Parse(`qemu-img create -f qcow2 /var/lib/charVstack/images/{{.}}.qcow2 16G`)
 	if err != nil {
 		return err
 	}
