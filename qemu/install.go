@@ -5,8 +5,8 @@ import (
 	"text/template"
 )
 
-func install(opts InstallOpts) error {
-	tmpl, err := template.New("install").Parse(`qemu-system-x86_64 -smp {{.VCpu}} -m {{.Memory}} -cdrom "{{.Name}}" -boot order=d -drive file={{.Disk}},format=raw`)
+func Install(opts InstallOpts) error {
+	tmpl, err := template.New("install").Parse(`qemu-system-x86_64 -smp {{.VCpu}} -m {{.Memory}} -cdrom "{{.Name}}" -boot order=d -drive file=/var/lib/libvirt/images/test01.qcow2,format=qcow2`)
 	if err != nil {
 		return err
 	}
