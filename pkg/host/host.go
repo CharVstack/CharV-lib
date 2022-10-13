@@ -6,15 +6,15 @@ import (
 	"github.com/CharVstack/CharV-lib/internal/host/storage"
 )
 
-func GetInfo() Host {
+func GetInfo(opt GetInfoOptions) Host {
 	cpuInfo := cpu.GetInfo()
 	memoryInfo := memory.GetInfo()
 
-	poolConfigPaths := storage.GetPoolFiles()
+	poolConfigPaths := storage.GetPoolFiles(opt.storageDir)
 
 	var storagePools []*storage.PoolInfo
 	for _, file := range poolConfigPaths {
-		storagePoolInfo := storage.GetPoolInfo(file)
+		storagePoolInfo := storage.GetPoolInfo(file, opt.storageDir)
 		isExists, _ := storage.IsPoolExists(storagePoolInfo.Path)
 		if isExists {
 			storagePoolInfo.Status = "Active"
@@ -31,4 +31,8 @@ func GetInfo() Host {
 		Memory:       memoryInfo,
 		StoragePools: storagePools,
 	}
+}
+
+type GetInfoOptions struct {
+	storageDir string
 }
