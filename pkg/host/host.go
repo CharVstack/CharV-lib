@@ -3,22 +3,22 @@ package host
 import (
 	"github.com/CharVstack/CharV-lib/internal/host/cpu"
 	"github.com/CharVstack/CharV-lib/internal/host/memory"
-	storage2 "github.com/CharVstack/CharV-lib/internal/host/storage"
+	"github.com/CharVstack/CharV-lib/internal/host/storage"
 )
 
 func GetInfo() Host {
 	cpuInfo := cpu.GetInfo()
 	memoryInfo := memory.GetInfo()
 
-	poolConfigPaths := storage2.GetPoolFiles()
+	poolConfigPaths := storage.GetPoolFiles()
 
-	var storagePools []*storage2.PoolInfo
+	var storagePools []*storage.PoolInfo
 	for _, file := range poolConfigPaths {
-		storagePoolInfo := storage2.GetPoolInfo(file)
-		isExists, _ := storage2.IsPoolExists(storagePoolInfo.Path)
+		storagePoolInfo := storage.GetPoolInfo(file)
+		isExists, _ := storage.IsPoolExists(storagePoolInfo.Path)
 		if isExists {
 			storagePoolInfo.Status = "Active"
-			storagePoolInfo.TotalSize, storagePoolInfo.UsedSize = storage2.GetSize(storagePoolInfo.Path)
+			storagePoolInfo.TotalSize, storagePoolInfo.UsedSize = storage.GetSize(storagePoolInfo.Path)
 		} else {
 			storagePoolInfo.Status = "Error"
 		}
