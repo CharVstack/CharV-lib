@@ -20,7 +20,7 @@ func TestParse(t *testing.T) {
 			},
 		},
 	}
-	machine, err := parse("../test/resources/machines/ubuntu.json")
+	machine, err := parse("../../test/resources/machines/ubuntu.json")
 	if err != nil {
 		t.Fatal(err)
 	}

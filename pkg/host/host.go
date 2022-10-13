@@ -1,9 +1,9 @@
 package host
 
 import (
-	"github.com/CharVstack/CharV-lib/host/internal/cpu"
-	"github.com/CharVstack/CharV-lib/host/internal/memory"
-	"github.com/CharVstack/CharV-lib/host/internal/storage"
+	"github.com/CharVstack/CharV-lib/internal/host/cpu"
+	"github.com/CharVstack/CharV-lib/internal/host/memory"
+	"github.com/CharVstack/CharV-lib/internal/host/storage"
 )
 
 func GetInfo(opt GetInfoOptions) Host {
