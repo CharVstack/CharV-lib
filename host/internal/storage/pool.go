@@ -12,8 +12,7 @@ func IsPoolExists(path string) (bool, error) {
 	return err == nil && f.IsDir(), err
 }
 
-func GetPoolFiles() []string {
-	storageDir := os.Getenv("STORAGE_DIR")
+func GetPoolFiles(storageDir string) []string {
 	entries, err := os.ReadDir(storageDir)
 	if err != nil {
 		fmt.Println(err)
@@ -26,8 +25,7 @@ func GetPoolFiles() []string {
 	return files
 }
 
-func GetPoolInfo(file string) *PoolInfo {
-	storageDir := os.Getenv("STORAGE_DIR")
+func GetPoolInfo(file string, storageDir string) *PoolInfo {
 	path, _ := filepath.Abs(filepath.Join(storageDir, file))
 	bytes, err := os.ReadFile(path)
 	if err != nil {
