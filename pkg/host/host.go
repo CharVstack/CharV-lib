@@ -10,11 +10,11 @@ func GetInfo(opt GetInfoOptions) Host {
 	cpuInfo := cpu.GetInfo()
 	memoryInfo := memory.GetInfo()
 
-	poolConfigPaths := storage.GetPoolFiles(opt.storageDir)
+	poolConfigPaths := storage.GetPoolFiles(opt.StorageDir)
 
 	var storagePools []*storage.PoolInfo
 	for _, file := range poolConfigPaths {
-		storagePoolInfo := storage.GetPoolInfo(file, opt.storageDir)
+		storagePoolInfo := storage.GetPoolInfo(file, opt.StorageDir)
 		isExists, _ := storage.IsPoolExists(storagePoolInfo.Path)
 		if isExists {
 			storagePoolInfo.Status = "Active"
@@ -34,5 +34,5 @@ func GetInfo(opt GetInfoOptions) Host {
 }
 
 type GetInfoOptions struct {
-	storageDir string
+	StorageDir string
 }
