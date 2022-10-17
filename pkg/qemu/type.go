@@ -28,3 +28,16 @@ type InstallOpts struct {
 type StartOpts struct {
 	Disk string
 }
+
+type Metadata struct {
+	ApiVersion string `json:"api_version"`
+	Id         string `json:"id"`
+}
+
+type Vm struct {
+	Devices  Devices  `json:"disk"`
+	Memory   int      `json:"memory"`
+	Metadata Metadata `json:"metadata"`
+	Name     string   `json:"name"`
+	Vcpu     int      `json:"vcpu"`
+}
