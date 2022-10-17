@@ -2,7 +2,6 @@ package qemu
 
 import (
 	"bytes"
-	"fmt"
 	"text/template"
 )
 
@@ -20,19 +19,15 @@ func CreateDisk(opts string) error {
 	return run(cmd)
 }
 
-func GetDiskInfo() {
-
-}
-
 func CreateInfoJSON(opts Vm) Vm {
-	//uuidの作成
 	var createUUID string
 	createUUID = "this-is-uuid"
 
-	//structに合わせる
 	createJSON := Vm{
-		Devices: Devices{},
-		Memory:  opts.Memory,
+		Devices: Devices{
+			Disk: make([]Disk, len(opts.Devices.Disk)),
+		},
+		Memory: opts.Memory,
 		Metadata: Metadata{
 			ApiVersion: "v1",
 			Id:         createUUID,
@@ -41,11 +36,9 @@ func CreateInfoJSON(opts Vm) Vm {
 		Vcpu: opts.Vcpu,
 	}
 
-	//Device.Diskの個数を把握し、その分だけstructに代入する
 	for i := 0; i < len(opts.Devices.Disk); i++ {
 		createJSON.Devices.Disk[i].Type = opts.Devices.Disk[i].Type
-		createJSON.Devices.Disk[i].Type = opts.Devices.Disk[i].Path
-		fmt.Println(createJSON.Devices.Disk)
+		createJSON.Devices.Disk[i].Path = opts.Devices.Disk[i].Path
 	}
 
 	return createJSON
