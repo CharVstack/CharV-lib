@@ -7,7 +7,7 @@ type Disk struct {
 }
 
 type Devices struct {
-	Disk []*Disk `json:"disk"`
+	Disk []Disk `json:"disk"`
 }
 
 type Machine struct {
