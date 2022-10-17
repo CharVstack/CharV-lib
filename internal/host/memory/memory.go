@@ -2,8 +2,12 @@ package memory
 
 import "github.com/shirou/gopsutil/v3/mem"
 
-func GetInfo() Memory {
-	memInfo, _ := mem.VirtualMemory()
+func GetInfo() (Memory, error) {
+	memInfo, err := mem.VirtualMemory()
+	if err != nil {
+		return Memory{}, err
+	}
+
 	memTotal := memInfo.Total
 	memUsed := memInfo.Used
 	memFree := memInfo.Free
@@ -14,5 +18,5 @@ func GetInfo() Memory {
 		Used:        memUsed,
 		Free:        memFree,
 		UsedPercent: memUsedPercent,
-	}
+	}, nil
 }
