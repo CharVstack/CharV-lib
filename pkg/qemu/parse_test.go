@@ -13,9 +13,8 @@ func TestParse(t *testing.T) {
 		Devices: Devices{
 			Disk: []*Disk{
 				{
-					Type:   "file",
-					Device: "disk",
-					Path:   "/path/to/ubuntu.qcow2",
+					Type: "file",
+					Path: "/path/to/ubuntu.qcow2",
 				},
 			},
 		},

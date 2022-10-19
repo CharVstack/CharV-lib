@@ -1,13 +1,12 @@
 package qemu
 
 type Disk struct {
-	Type   string `json:"type"`
-	Device string `json:"device"`
-	Path   string `json:"path"`
+	Type string `json:"type"`
+	Path string `json:"path"`
 }
 
 type Devices struct {
-	Disk []Disk `json:"disk"`
+	Disk []*Disk `json:"disk"`
 }
 
 type Machine struct {
@@ -35,9 +34,9 @@ type Metadata struct {
 }
 
 type Vm struct {
-	Devices  Devices  `json:"disk"`
+	Devices  Devices  `json:"devices"`
 	Memory   int      `json:"memory"`
 	Metadata Metadata `json:"metadata"`
 	Name     string   `json:"name"`
-	Vcpu     int      `json:"vcpu"`
+	VCpu     int      `json:"vcpu"`
 }
