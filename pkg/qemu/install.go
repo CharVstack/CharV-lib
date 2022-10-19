@@ -4,9 +4,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/google/uuid"
 	"os"
 	"text/template"
+
+	"github.com/google/uuid"
 )
 
 func CreateDisk(opts string) error {
