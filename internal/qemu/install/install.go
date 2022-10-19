@@ -3,8 +3,9 @@ package install
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/google/uuid"
 	"os"
+
+	"github.com/google/uuid"
 )
 
 func CreateInfoJSON(opts RequestOpts) (Vm, error) {

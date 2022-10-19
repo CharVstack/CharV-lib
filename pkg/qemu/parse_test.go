@@ -3,6 +3,8 @@ package qemu
 import (
 	"reflect"
 	"testing"
+
+	"github.com/CharVstack/CharV-lib/internal/qemu/install"
 )
 
 func TestParse(t *testing.T) {
@@ -10,8 +12,8 @@ func TestParse(t *testing.T) {
 		Name:   "ubuntu",
 		Memory: 1024,
 		VCpu:   1,
-		Devices: Devices{
-			Disk: []*Disk{
+		Devices: install.Devices{
+			Disk: []*install.Disk{
 				{
 					Type: "file",
 					Path: "/path/to/ubuntu.qcow2",

@@ -2,8 +2,9 @@ package qemu
 
 import (
 	"bytes"
-	"github.com/CharVstack/CharV-lib/internal/qemu/install"
 	"text/template"
+
+	"github.com/CharVstack/CharV-lib/internal/qemu/install"
 )
 
 func CreateDisk(opts string) error {
