@@ -11,3 +11,7 @@ type Host struct {
 	Memory       memory.Memory
 	StoragePools []*storage.PoolInfo
 }
+
+type GetInfoOptions struct {
+	StorageDir string
+}
