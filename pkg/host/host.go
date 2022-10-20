@@ -1,32 +1,33 @@
 package host
 
 import (
+	"github.com/CharVstack/CharV-lib/domain"
 	"github.com/CharVstack/CharV-lib/internal/host/cpu"
 	"github.com/CharVstack/CharV-lib/internal/host/memory"
 	"github.com/CharVstack/CharV-lib/internal/host/storage"
 )
 
-func GetInfo(opt GetInfoOptions) (Host, error) {
+func GetInfo(opt domain.GetInfoOptions) (domain.Host, error) {
 	cpuInfo, err := cpu.GetInfo()
 	if err != nil {
-		return Host{}, err
+		return domain.Host{}, err
 	}
 
 	memoryInfo, err := memory.GetInfo()
 	if err != nil {
-		return Host{}, err
+		return domain.Host{}, err
 	}
 
-	poolConfigPaths, err := storage.GetPoolFiles(opt.storageDir)
+	poolConfigPaths, err := storage.GetPoolFiles(opt.StorageDir)
 	if err != nil {
-		return Host{}, err
+		return domain.Host{}, err
 	}
 
 	var storagePools []*storage.PoolInfo
 	for _, file := range poolConfigPaths {
-		storagePoolInfo, err := storage.GetPoolInfo(file, opt.storageDir)
+		storagePoolInfo, err := storage.GetPoolInfo(file, opt.StorageDir)
 		if err != nil {
-			return Host{}, err
+			return domain.Host{}, err
 		}
 
 		isExists := storage.IsPoolExists(storagePoolInfo.Path)
@@ -44,13 +45,9 @@ func GetInfo(opt GetInfoOptions) (Host, error) {
 		storagePools = append(storagePools, storagePoolInfo)
 	}
 
-	return Host{
+	return domain.Host{
 		Cpu:          cpuInfo,
 		Memory:       memoryInfo,
 		StoragePools: storagePools,
 	}, nil
-}
-
-type GetInfoOptions struct {
-	storageDir string
 }

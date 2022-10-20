@@ -3,19 +3,20 @@ package qemu
 import (
 	"reflect"
 	"testing"
+
+	"github.com/CharVstack/CharV-lib/domain"
 )
 
 func TestParse(t *testing.T) {
-	testMachine := Machine{
+	testMachine := domain.Machine{
 		Name:   "ubuntu",
 		Memory: 1024,
 		VCpu:   1,
-		Devices: Devices{
-			Disk: []*Disk{
+		Devices: domain.Devices{
+			Disk: []*domain.Disk{
 				{
-					Type:   "file",
-					Device: "disk",
-					Path:   "/path/to/ubuntu.qcow2",
+					Type: "file",
+					Path: "/path/to/ubuntu.qcow2",
 				},
 			},
 		},

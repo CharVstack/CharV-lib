@@ -5,22 +5,24 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+
+	"github.com/CharVstack/CharV-lib/domain"
 )
 
-func parse(path string) (Machine, error) {
-	var machine Machine
+func parse(path string) (domain.Machine, error) {
+	var machine domain.Machine
 	abspath, err := filepath.Abs(path)
 	f, err := os.Open(abspath)
 	if err != nil {
-		return Machine{}, err
+		return domain.Machine{}, err
 	}
 	defer f.Close()
 	b, err := ioutil.ReadAll(f)
 	if err != nil {
-		return Machine{}, err
+		return domain.Machine{}, err
 	}
 	if err := json.Unmarshal(b, &machine); err != nil {
-		return Machine{}, err
+		return domain.Machine{}, err
 	}
 	return machine, nil
 }

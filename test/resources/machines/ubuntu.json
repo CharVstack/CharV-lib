@@ -6,7 +6,6 @@
       "disk": [
         {
           "type": "file",
-          "device": "disk",
           "path": "/path/to/ubuntu.qcow2"
         }
       ]

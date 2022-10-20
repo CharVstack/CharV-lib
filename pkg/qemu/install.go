@@ -3,6 +3,10 @@ package qemu
 import (
 	"bytes"
 	"text/template"
+
+	"github.com/CharVstack/CharV-lib/domain"
+
+	"github.com/CharVstack/CharV-lib/internal/qemu/install"
 )
 
 func CreateDisk(opts string) error {
@@ -19,15 +23,24 @@ func CreateDisk(opts string) error {
 	return run(cmd)
 }
 
-func Install(opts InstallOpts) error {
+func Install(opts domain.InstallOpts) (domain.Vm, error) {
+
 	tmpl, err := template.New("install").Parse(`qemu-system-x86_64 -accel kvm -daemonize -display none -name guest={{.Name}} -smp {{.VCpu}} -m {{.Memory}} -cdrom /var/lib/charVstack/iso/{{.Image}} -boot order=d -drive file=/var/lib/charVstack/images/{{.Disk}}.qcow2,format=qcow2 -drive file=/var/lib/charVstack/bios/bios.bin,format=raw,if=pflash,readonly=on`)
 	if err != nil {
-		return err
+		return domain.Vm{}, err
 	}
 	var buf bytes.Buffer
-	if err := tmpl.Execute(&buf, opts); err != nil {
-		return err
+	err = tmpl.Execute(&buf, opts)
+	if err != nil {
+		return domain.Vm{}, err
 	}
 	cmd := buf.String()
-	return run(cmd)
+
+	var getJSON domain.Vm
+	getJSON, err = install.CreateInfoJSON(opts)
+	if err != nil {
+		return domain.Vm{}, err
+	}
+
+	return getJSON, run(cmd)
 }

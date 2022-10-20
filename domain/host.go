@@ -1,4 +1,4 @@
-package host
+package domain
 
 import (
 	"github.com/CharVstack/CharV-lib/internal/host/cpu"
@@ -10,4 +10,8 @@ type Host struct {
 	Cpu          cpu.Cpu
 	Memory       memory.Memory
 	StoragePools []*storage.PoolInfo
+}
+
+type GetInfoOptions struct {
+	StorageDir string
 }

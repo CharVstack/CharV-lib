@@ -1,9 +1,8 @@
-package qemu
+package domain
 
 type Disk struct {
-	Type   string `json:"type"`
-	Device string `json:"device"`
-	Path   string `json:"path"`
+	Type string `json:"type"`
+	Path string `json:"path"`
 }
 
 type Devices struct {
@@ -27,4 +26,17 @@ type InstallOpts struct {
 
 type StartOpts struct {
 	Disk string
+}
+
+type Metadata struct {
+	ApiVersion string `json:"api_version"`
+	Id         string `json:"id"`
+}
+
+type Vm struct {
+	Devices  Devices  `json:"devices"`
+	Memory   int      `json:"memory"`
+	Metadata Metadata `json:"metadata"`
+	Name     string   `json:"name"`
+	VCpu     int      `json:"vcpu"`
 }
