@@ -2,10 +2,11 @@ package qemu
 
 import (
 	"encoding/json"
-	"github.com/CharVstack/CharV-lib/domain"
 	"io/ioutil"
 	"os"
 	"path/filepath"
+
+	"github.com/CharVstack/CharV-lib/domain"
 )
 
 func parse(path string) (domain.Machine, error) {

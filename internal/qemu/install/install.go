@@ -3,8 +3,9 @@ package install
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/CharVstack/CharV-lib/domain"
 	"os"
+
+	"github.com/CharVstack/CharV-lib/domain"
 
 	"github.com/google/uuid"
 )

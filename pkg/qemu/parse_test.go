@@ -1,9 +1,10 @@
 package qemu
 
 import (
-	"github.com/CharVstack/CharV-lib/domain"
 	"reflect"
 	"testing"
+
+	"github.com/CharVstack/CharV-lib/domain"
 )
 
 func TestParse(t *testing.T) {

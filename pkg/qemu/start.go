@@ -2,8 +2,9 @@ package qemu
 
 import (
 	"bytes"
-	"github.com/CharVstack/CharV-lib/domain"
 	"text/template"
+
+	"github.com/CharVstack/CharV-lib/domain"
 )
 
 func start(opts domain.StartOpts) error {
