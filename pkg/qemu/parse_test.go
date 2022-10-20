@@ -1,19 +1,18 @@
 package qemu
 
 import (
+	"github.com/CharVstack/CharV-lib/domain"
 	"reflect"
 	"testing"
-
-	"github.com/CharVstack/CharV-lib/internal/qemu/install"
 )
 
 func TestParse(t *testing.T) {
-	testMachine := Machine{
+	testMachine := domain.Machine{
 		Name:   "ubuntu",
 		Memory: 1024,
 		VCpu:   1,
-		Devices: install.Devices{
-			Disk: []*install.Disk{
+		Devices: domain.Devices{
+			Disk: []*domain.Disk{
 				{
 					Type: "file",
 					Path: "/path/to/ubuntu.qcow2",

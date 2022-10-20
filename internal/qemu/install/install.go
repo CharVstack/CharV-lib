@@ -3,22 +3,23 @@ package install
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/CharVstack/CharV-lib/domain"
 	"os"
 
 	"github.com/google/uuid"
 )
 
-func CreateInfoJSON(opts RequestOpts) (Vm, error) {
+func CreateInfoJSON(opts domain.InstallOpts) (domain.Vm, error) {
 	uuidInt, err := uuid.NewRandom()
 	if err != nil {
-		return Vm{}, err
+		return domain.Vm{}, err
 	}
 
 	uuidString := uuidInt.String()
 
-	vmInfo := Vm{
-		Devices: Devices{
-			Disk: []*Disk{
+	vmInfo := domain.Vm{
+		Devices: domain.Devices{
+			Disk: []*domain.Disk{
 				{
 					Type: "qcow2",
 					Path: "/var/lib/charVstack/image/" + opts.Disk,
@@ -26,7 +27,7 @@ func CreateInfoJSON(opts RequestOpts) (Vm, error) {
 			},
 		},
 		Memory: opts.Memory,
-		Metadata: Metadata{
+		Metadata: domain.Metadata{
 			ApiVersion: "v1",
 			Id:         uuidString,
 		},
@@ -37,7 +38,7 @@ func CreateInfoJSON(opts RequestOpts) (Vm, error) {
 	var MarshalJSON []byte
 	MarshalJSON, err = json.Marshal(vmInfo)
 	if err != nil {
-		return Vm{}, err
+		return domain.Vm{}, err
 	}
 
 	createJSONPath := "/var/lib/charVstack/machines/"
@@ -47,7 +48,7 @@ func CreateInfoJSON(opts RequestOpts) (Vm, error) {
 	var createFile *os.File
 	createFile, err = os.Create(fileName)
 	if err != nil {
-		return Vm{}, err
+		return domain.Vm{}, err
 	}
 	defer func() {
 		err = createFile.Close()
@@ -58,7 +59,7 @@ func CreateInfoJSON(opts RequestOpts) (Vm, error) {
 
 	_, err = createFile.Write(MarshalJSON)
 	if err != nil {
-		return Vm{}, err
+		return domain.Vm{}, err
 	}
 
 	return vmInfo, err

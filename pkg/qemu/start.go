@@ -2,10 +2,11 @@ package qemu
 
 import (
 	"bytes"
+	"github.com/CharVstack/CharV-lib/domain"
 	"text/template"
 )
 
-func start(opts StartOpts) error {
+func start(opts domain.StartOpts) error {
 	tmpl, err := template.New("start").Parse(`qemu-system-x86_64 {{.Disk}}`)
 	if err != nil {
 		return err

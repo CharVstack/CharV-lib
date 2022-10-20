@@ -1,4 +1,4 @@
-package host
+package domain
 
 import (
 	"github.com/CharVstack/CharV-lib/internal/host/cpu"
