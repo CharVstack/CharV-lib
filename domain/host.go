@@ -1,15 +1,13 @@
 package domain
 
 import (
-	"github.com/CharVstack/CharV-lib/internal/host/cpu"
-	"github.com/CharVstack/CharV-lib/internal/host/memory"
-	"github.com/CharVstack/CharV-lib/internal/host/storage"
+	"github.com/CharVstack/CharV-lib/domain/models"
 )
 
 type Host struct {
-	Cpu          cpu.Cpu
-	Memory       memory.Memory
-	StoragePools []*storage.PoolInfo
+	Cpu          models.Cpu
+	Memory       models.Memory
+	StoragePools []*models.StoragePool
 }
 
 type GetInfoOptions struct {

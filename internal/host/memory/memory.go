@@ -1,11 +1,14 @@
 package memory
 
-import "github.com/shirou/gopsutil/v3/mem"
+import (
+	"github.com/CharVstack/CharV-lib/domain/models"
+	"github.com/shirou/gopsutil/v3/mem"
+)
 
-func GetInfo() (Memory, error) {
+func GetInfo() (models.Memory, error) {
 	memInfo, err := mem.VirtualMemory()
 	if err != nil {
-		return Memory{}, err
+		return models.Memory{}, err
 	}
 
 	memTotal := memInfo.Total
@@ -13,7 +16,7 @@ func GetInfo() (Memory, error) {
 	memFree := memInfo.Free
 	memUsedPercent := memInfo.UsedPercent
 
-	return Memory{
+	return models.Memory{
 		Total:       memTotal,
 		Used:        memUsed,
 		Free:        memFree,

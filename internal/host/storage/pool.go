@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+
+	"github.com/CharVstack/CharV-lib/domain/models"
 )
 
 func IsPoolExists(path string) bool {
@@ -24,14 +26,14 @@ func GetPoolFiles(storageDir string) ([]string, error) {
 	return files, nil
 }
 
-func GetPoolInfo(file string, storageDir string) (*PoolInfo, error) {
+func GetPoolInfo(file string, storageDir string) (*models.StoragePool, error) {
 	path, _ := filepath.Abs(filepath.Join(storageDir, file))
 	bytes, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
 
-	var storagePool PoolInfo
+	var storagePool models.StoragePool
 	err = json.Unmarshal(bytes, &storagePool)
 	if err != nil {
 		return nil, err

@@ -2,6 +2,7 @@ package host
 
 import (
 	"github.com/CharVstack/CharV-lib/domain"
+	"github.com/CharVstack/CharV-lib/domain/models"
 	"github.com/CharVstack/CharV-lib/internal/host/cpu"
 	"github.com/CharVstack/CharV-lib/internal/host/memory"
 	"github.com/CharVstack/CharV-lib/internal/host/storage"
@@ -23,7 +24,7 @@ func GetInfo(opt domain.GetInfoOptions) (domain.Host, error) {
 		return domain.Host{}, err
 	}
 
-	var storagePools []*storage.PoolInfo
+	var storagePools []*models.StoragePool
 	for _, file := range poolConfigPaths {
 		storagePoolInfo, err := storage.GetPoolInfo(file, opt.StorageDir)
 		if err != nil {

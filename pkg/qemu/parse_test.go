@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/CharVstack/CharV-lib/domain"
+	"github.com/CharVstack/CharV-lib/domain/models"
 )
 
 func TestParse(t *testing.T) {
@@ -12,8 +13,8 @@ func TestParse(t *testing.T) {
 		Name:   "ubuntu",
 		Memory: 1024,
 		VCpu:   1,
-		Devices: domain.Devices{
-			Disk: []*domain.Disk{
+		Devices: models.Devices{
+			Disk: []models.Disk{
 				{
 					Type: "file",
 					Path: "/path/to/ubuntu.qcow2",
