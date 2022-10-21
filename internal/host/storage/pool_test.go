@@ -3,6 +3,8 @@ package storage
 import (
 	"reflect"
 	"testing"
+
+	"github.com/CharVstack/CharV-lib/domain/models"
 )
 
 func TestGetPoolFiles(t *testing.T) {
@@ -14,7 +16,7 @@ func TestGetPoolFiles(t *testing.T) {
 }
 
 func TestGetPoolInfo(t *testing.T) {
-	storagePool := PoolInfo{
+	storagePool := models.StoragePool{
 		Name: "default",
 		Path: "/var/lib/libvirt/default",
 	}
