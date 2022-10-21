@@ -1,17 +1,16 @@
-package install
+package qemu
 
 import (
 	"encoding/json"
 	"fmt"
 	"os"
 
-	"github.com/CharVstack/CharV-lib/domain"
 	"github.com/CharVstack/CharV-lib/domain/models"
 
 	"github.com/google/uuid"
 )
 
-func CreateInfoJSON(opts domain.InstallOpts) (models.Vm, error) {
+func CreateInfoJSON(opts models.InstallOpts) (models.Vm, error) {
 	uuidInt, err := uuid.NewRandom()
 	if err != nil {
 		return models.Vm{}, err
