@@ -4,12 +4,11 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/CharVstack/CharV-lib/domain"
 	"github.com/CharVstack/CharV-lib/domain/models"
 )
 
 func TestParse(t *testing.T) {
-	testMachine := domain.Machine{
+	testMachine := models.Machine{
 		Name:   "ubuntu",
 		Memory: 1024,
 		VCpu:   1,
