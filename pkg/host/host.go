@@ -23,7 +23,7 @@ func GetInfo(opt models.GetInfoOptions) (models.Host, error) {
 		return models.Host{}, err
 	}
 
-	var storagePools []*models.StoragePool
+	var storagePools []models.StoragePool
 	for _, file := range poolConfigPaths {
 		storagePoolInfo, err := storage.GetPoolInfo(file, opt.StorageDir)
 		if err != nil {
@@ -47,7 +47,7 @@ func GetInfo(opt models.GetInfoOptions) (models.Host, error) {
 
 	return models.Host{
 		Cpu:          cpuInfo,
-		Memory:       memoryInfo,
+		Mem:          memoryInfo,
 		StoragePools: storagePools,
 	}, nil
 }
