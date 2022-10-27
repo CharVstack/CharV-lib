@@ -9,22 +9,24 @@ import (
 	"github.com/CharVstack/CharV-lib/internal/qemu"
 )
 
-func CreateDisk(opts string) error {
-	tmpl, err := template.New("create").Parse(`qemu-img create -f qcow2 /var/lib/charVstack/images/{{.}}.qcow2 16G`)
+func CreateDisk(opts string) (string, error) {
+	opts = "/var/lib/charVstack/images/" + opts + "." + "qcow2"
+	tmpl, err := template.New("create").Parse(`qemu-img create -f qcow2 {{.}} 16G`)
 	if err != nil {
-		return err
+		return "", err
 	}
+
 	var buf bytes.Buffer
-	if err := tmpl.Execute(&buf, opts); err != nil {
-		return err
+	err = tmpl.Execute(&buf, opts)
+	if err != nil {
+		return "", err
 	}
 	cmd := buf.String()
 
-	return run(cmd)
+	return opts, run(cmd)
 }
 
-func Install(opts models.InstallOpts) (models.Vm, error) {
-
+func Install(opts models.InstallOpts, filePath string) (models.Vm, error) {
 	tmpl, err := template.New("install").Parse(`qemu-system-x86_64 -accel kvm -daemonize -display none -name guest={{.Name}} -smp {{.VCpu}} -m {{.Memory}} -cdrom /var/lib/charVstack/iso/{{.Image}} -boot order=d -drive file=/var/lib/charVstack/images/{{.Disk}}.qcow2,format=qcow2 -drive file=/var/lib/charVstack/bios/bios.bin,format=raw,if=pflash,readonly=on`)
 	if err != nil {
 		return models.Vm{}, err
@@ -36,11 +38,11 @@ func Install(opts models.InstallOpts) (models.Vm, error) {
 	}
 	cmd := buf.String()
 
-	var getJSON models.Vm
-	getJSON, err = qemu.CreateInfoJSON(opts)
+	var resJSON models.Vm
+	resJSON, err = qemu.CreateInfoJSON(opts, filePath)
 	if err != nil {
 		return models.Vm{}, err
 	}
 
-	return getJSON, run(cmd)
+	return resJSON, run(cmd)
 }
