@@ -30,7 +30,7 @@ func CreateInfoJSON(opts models.InstallOpts, filePath string) (models.Vm, error)
 		Devices: models.Devices{
 			Disk: []models.Disk{
 				{
-					Type:   diskType,
+					Type:   models.DiskType(diskType),
 					Device: models.DiskDeviceDisk,
 					Path:   "/var/lib/charVstack/image/" + opts.Disk + typeMap[diskType],
 				},
