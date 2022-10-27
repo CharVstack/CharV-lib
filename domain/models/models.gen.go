@@ -9,14 +9,15 @@ import (
 
 // Defines values for DiskDevice.
 const (
-	DiskDeviceCdrom DiskDevice = "cdrom"
-	DiskDeviceDisk  DiskDevice = "disk"
+	DiskDeviceCdrom   DiskDevice = "cdrom"
+	DiskDeviceDisk    DiskDevice = "disk"
+	DiskDeviceUnknown DiskDevice = "unknown"
 )
 
 // Defines values for DiskType.
 const (
-	Qcow2   DiskType = "qcow2"
-	Unknown DiskType = "unknown"
+	DiskTypeQcow2   DiskType = "qcow2"
+	DiskTypeUnknown DiskType = "unknown"
 )
 
 // Defines values for StoragePoolStatus.
