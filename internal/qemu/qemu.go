@@ -24,7 +24,7 @@ func CreateInfoJSON(opts models.InstallOpts, filePath string) (models.Vm, error)
 	if err != nil {
 		fmt.Println(err)
 	}
-	typeMap := map[models.DiskType]string{models.Qcow2: ".qcow2"}
+	typeMap := map[models.DiskType]string{models.DiskTypeQcow2: ".qcow2"}
 
 	vmInfo := models.Vm{
 		Devices: models.Devices{
@@ -86,7 +86,7 @@ func CheckFileType(filePath string) (models.DiskType, error) {
 		return "", errors.New("Not QEMU QCOW Image (v3) ")
 	}
 
-	return models.Qcow2, nil
+	return models.DiskTypeQcow2, nil
 }
 
 func ReadBinaryFile(readFile io.Reader, index int) []byte {
