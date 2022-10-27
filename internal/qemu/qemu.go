@@ -1,8 +1,11 @@
 package qemu
 
 import (
+	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
+	"io"
 	"os"
 
 	"github.com/CharVstack/CharV-lib/domain/models"
@@ -10,18 +13,26 @@ import (
 	"github.com/google/uuid"
 )
 
-func CreateInfoJSON(opts models.InstallOpts) (models.Vm, error) {
+func CreateInfoJSON(opts models.InstallOpts, filePath string) (models.Vm, error) {
 	uuidObj, err := uuid.NewRandom()
 	if err != nil {
 		return models.Vm{}, err
 	}
 
+	var diskType models.DiskType
+	diskType, err = CheckFileType(filePath)
+	if err != nil {
+		fmt.Println(err)
+	}
+	typeMap := map[models.DiskType]string{models.DiskTypeQcow2: ".qcow2"}
+
 	vmInfo := models.Vm{
 		Devices: models.Devices{
 			Disk: []models.Disk{
 				{
-					Type: "qcow2",
-					Path: "/var/lib/charVstack/image/" + opts.Disk,
+					Type:   diskType,
+					Device: models.DiskDeviceDisk,
+					Path:   "/var/lib/charVstack/image/" + opts.Disk + typeMap[diskType],
 				},
 			},
 		},
@@ -62,4 +73,27 @@ func CreateInfoJSON(opts models.InstallOpts) (models.Vm, error) {
 	}
 
 	return vmInfo, err
+}
+
+func CheckFileType(filePath string) (models.DiskType, error) {
+	buf, err := os.ReadFile(filePath)
+	if err != nil {
+		return "", err
+	}
+
+	readFile := bytes.NewReader(buf)
+	if !bytes.Equal(ReadBinaryFile(readFile, 4), []byte("QFI\xfb")) {
+		return "", errors.New("Not QEMU QCOW Image (v3) ")
+	}
+
+	return models.DiskTypeQcow2, nil
+}
+
+func ReadBinaryFile(readFile io.Reader, index int) []byte {
+	buf := make([]byte, index)
+	cnt, err := readFile.Read(buf)
+	if err != nil || index != cnt {
+		return []byte{}
+	}
+	return buf
 }
