@@ -26,17 +26,17 @@ func GetPoolFiles(storageDir string) ([]string, error) {
 	return files, nil
 }
 
-func GetPoolInfo(file string, storageDir string) (*models.StoragePool, error) {
+func GetPoolInfo(file string, storageDir string) (models.StoragePool, error) {
 	path, _ := filepath.Abs(filepath.Join(storageDir, file))
 	bytes, err := os.ReadFile(path)
 	if err != nil {
-		return nil, err
+		return models.StoragePool{}, err
 	}
 
 	var storagePool models.StoragePool
 	err = json.Unmarshal(bytes, &storagePool)
 	if err != nil {
-		return nil, err
+		return models.StoragePool{}, err
 	}
-	return &storagePool, nil
+	return storagePool, nil
 }
