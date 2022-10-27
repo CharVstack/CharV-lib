@@ -21,7 +21,7 @@ func TestGetPoolInfo(t *testing.T) {
 		Path: "/var/lib/libvirt/default",
 	}
 	storagePoolInfo, _ := GetPoolInfo("default.json", "../../../test/resources/storage")
-	if !reflect.DeepEqual(*storagePoolInfo, storagePool) {
+	if !reflect.DeepEqual(storagePoolInfo, storagePool) {
 		t.Error(`miss`)
 	}
 }

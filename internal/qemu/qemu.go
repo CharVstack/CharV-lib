@@ -14,12 +14,10 @@ import (
 )
 
 func CreateInfoJSON(opts models.InstallOpts, filePath string) (models.Vm, error) {
-	uuidInt, err := uuid.NewRandom()
+	uuidObj, err := uuid.NewRandom()
 	if err != nil {
 		return models.Vm{}, err
 	}
-
-	uuidString := uuidInt.String()
 
 	var diskType string
 	diskType, err = CheckFileType(filePath)
@@ -41,7 +39,7 @@ func CreateInfoJSON(opts models.InstallOpts, filePath string) (models.Vm, error)
 		Memory: opts.Memory,
 		Metadata: models.Metadata{
 			ApiVersion: "v1",
-			Id:         uuidString,
+			Id:         uuidObj,
 		},
 		Name: opts.Name,
 		Vcpu: opts.VCpu,
@@ -55,7 +53,7 @@ func CreateInfoJSON(opts models.InstallOpts, filePath string) (models.Vm, error)
 
 	createJSONPath := "/var/lib/charVstack/machines/"
 
-	fileName := createJSONPath + vmInfo.Name + "-" + vmInfo.Metadata.Id + ".json"
+	fileName := createJSONPath + vmInfo.Name + "-" + vmInfo.Metadata.Id.String() + ".json"
 
 	var createFile *os.File
 	createFile, err = os.Create(fileName)
