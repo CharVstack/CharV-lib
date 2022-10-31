@@ -36,7 +36,7 @@ func CreateInfoJSON(opts models.InstallOpts, filePath string) (models.Vm, error)
 				},
 			},
 		},
-		Memory: opts.Memory * 1024,
+		Memory: opts.Memory,
 		Metadata: models.Metadata{
 			ApiVersion: "v1",
 			Id:         uuidObj,
