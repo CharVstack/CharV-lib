@@ -2,7 +2,6 @@ package qemu
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"os/exec"
 	"regexp"
@@ -29,9 +28,9 @@ func GetRunningList() ([]string, error) {
 	return guests, nil
 }
 
-func ConvertJSONToStruct(directoryPath string) ([]models.Vm, error) {
+func ConvertToStruct(directoryPath string) ([]models.Vm, error) {
 	var resJSONList []models.Vm
-	files, err := os.ReadDir(directoryPath)
+	dir, err := os.ReadDir(directoryPath)
 	if err != nil {
 		return []models.Vm{}, err
 	}
@@ -41,10 +40,9 @@ func ConvertJSONToStruct(directoryPath string) ([]models.Vm, error) {
 	var cont int
 	var resJSON models.Vm
 
-	for _, file := range files {
+	for _, file := range dir {
 		openFile, err = os.Open(directoryPath + file.Name())
 		if err != nil {
-			fmt.Println(err)
 			return []models.Vm{}, err
 		}
 
@@ -62,12 +60,10 @@ func ConvertJSONToStruct(directoryPath string) ([]models.Vm, error) {
 
 	}
 
-	defer func() {
-		err = openFile.Close()
-		if err != nil {
-			fmt.Println("File Close Err: ", err)
-		}
-	}()
+	err = openFile.Close()
+	if err != nil {
+		return []models.Vm{}, err
+	}
 
 	return resJSONList, err
 }
