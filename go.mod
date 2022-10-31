@@ -6,6 +6,7 @@ require (
 	github.com/deepmap/oapi-codegen v1.11.0
 	github.com/google/uuid v1.3.0
 	github.com/mattn/go-shellwords v1.0.12
+	github.com/pkg/errors v0.9.1
 	github.com/shirou/gopsutil/v3 v3.22.6
 )
 

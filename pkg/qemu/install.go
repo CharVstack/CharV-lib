@@ -5,9 +5,22 @@ import (
 	"text/template"
 
 	"github.com/CharVstack/CharV-lib/domain/models"
-
+	"github.com/CharVstack/CharV-lib/internal/host/memory"
 	"github.com/CharVstack/CharV-lib/internal/qemu"
+	"github.com/pkg/errors"
 )
+
+func ExistsSufficientMemory(guestMemory uint64) error {
+	hostMemory, err := memory.GetInfo()
+	if err != nil {
+		return err
+	}
+
+	if hostMemory.Free/(1024*1024) <= guestMemory {
+		return errors.New("err: vm cannot be created because the memory specified for the guest is larger than the free memory of the host.")
+	}
+	return nil
+}
 
 func CreateDisk(name string) (string, error) {
 	name = "/var/lib/charVstack/images/" + name + "." + "qcow2"
