@@ -35,23 +35,15 @@ func ConvertToStruct(directoryPath string) ([]models.Vm, error) {
 		return []models.Vm{}, err
 	}
 
-	var openFile *os.File
-	var read = make([]byte, 1024)
-	var cont int
 	var resJSON models.Vm
 
 	for _, file := range dir {
-		openFile, err = os.Open(directoryPath + file.Name())
+		raw, err := os.ReadFile(directoryPath + file.Name())
 		if err != nil {
 			return []models.Vm{}, err
 		}
 
-		cont, err = openFile.Read(read)
-		if err != nil {
-			return []models.Vm{}, err
-		}
-
-		err = json.Unmarshal(read[:cont], &resJSON)
+		err = json.Unmarshal(raw, &resJSON)
 		if err != nil {
 			return []models.Vm{}, err
 		}
@@ -59,11 +51,5 @@ func ConvertToStruct(directoryPath string) ([]models.Vm, error) {
 		resJSONList = append(resJSONList, resJSON)
 
 	}
-
-	err = openFile.Close()
-	if err != nil {
-		return []models.Vm{}, err
-	}
-
 	return resJSONList, err
 }
