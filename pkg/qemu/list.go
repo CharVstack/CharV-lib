@@ -36,9 +36,10 @@ func ConvertToStruct(directoryPath string) ([]models.Vm, error) {
 	}
 
 	var resJSON models.Vm
+	var raw []byte
 
 	for _, file := range dir {
-		raw, err := os.ReadFile(directoryPath + file.Name())
+		raw, err = os.ReadFile(directoryPath + file.Name())
 		if err != nil {
 			return []models.Vm{}, err
 		}
