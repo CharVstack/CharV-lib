@@ -1,9 +1,13 @@
 package qemu
 
 import (
+	"encoding/json"
+	"os"
 	"os/exec"
 	"regexp"
 	"strings"
+
+	"github.com/CharVstack/CharV-lib/domain/models"
 )
 
 func GetRunningList() ([]string, error) {
@@ -22,4 +26,31 @@ func GetRunningList() ([]string, error) {
 		}
 	}
 	return guests, nil
+}
+
+func ConvertToStruct(directoryPath string) ([]models.Vm, error) {
+	var resJSONList []models.Vm
+	dir, err := os.ReadDir(directoryPath)
+	if err != nil {
+		return []models.Vm{}, err
+	}
+
+	var resJSON models.Vm
+	var raw []byte
+
+	for _, file := range dir {
+		raw, err = os.ReadFile(directoryPath + file.Name())
+		if err != nil {
+			return []models.Vm{}, err
+		}
+
+		err = json.Unmarshal(raw, &resJSON)
+		if err != nil {
+			return []models.Vm{}, err
+		}
+
+		resJSONList = append(resJSONList, resJSON)
+
+	}
+	return resJSONList, err
 }
